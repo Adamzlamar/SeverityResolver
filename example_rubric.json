@@ -1,0 +1,18 @@
+{
+  "questions": {
+    "funds_at_risk": "Does the evidence explicitly describe direct loss, theft or permanent lock of user funds?",
+    "file_write_or_exec": "Does the evidence explicitly describe writing files or executing code outside the intended boundary (e.g. path traversal, symlink escape, RCE)?",
+    "no_privileges": "Does the evidence explicitly say an unprivileged external attacker can trigger it?",
+    "state_corruption": "Does the evidence explicitly describe corruption of protocol state or accounting without direct fund loss?",
+    "dos_only": "Does the evidence explicitly say the impact is limited to denial of service or griefing?"
+  },
+  "rules": [
+    {"label": "critical", "all": ["funds_at_risk", "no_privileges"]},
+    {"label": "high", "all": ["funds_at_risk"]},
+    {"label": "high", "all": ["file_write_or_exec", "no_privileges"]},
+    {"label": "medium", "all": ["file_write_or_exec"]},
+    {"label": "medium", "all": ["state_corruption"], "none": ["dos_only"]},
+    {"label": "low", "all": ["dos_only"]}
+  ],
+  "default": "informational"
+}
